@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import User, { usernameRegex, emailRegex, passwordRegex, SALT_ROUNDS } from "../../schemas/User";
 import bcrypt from "bcrypt";
 import generateVerificationCode from "../../util/generateVerificationCode";
-import { sendConfirmationEmail } from "../../email";
+import { sendConfirmationEmail } from "../../util/email";
 
 const ONE_HOUR = 60 * 60 * 1000;
 
