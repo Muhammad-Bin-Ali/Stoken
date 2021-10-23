@@ -35,6 +35,11 @@ export function sendEmail(recipiant: string, subject: string, body: string) {
 }
 
 export function sendConfirmationEmail(recipiant: string, code: string) {
+  // when testing, you don't have to check your email
+  if (process.env.NODE_ENV !== "production") {
+    console.log(`Your email verification code is ${code}'`);
+  }
+
   code = code.toUpperCase();
 
   let body = `To verify your email, please enter the code <b>${code}</b> on our site.\nIf you did not create an account with us, please ignore this message.`;
