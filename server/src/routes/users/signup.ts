@@ -1,10 +1,5 @@
 import { Request, Response } from "express";
-import User, {
-  usernameRegex,
-  emailRegex,
-  passwordRegex,
-  SALT_ROUNDS,
-} from "../../schemas/User";
+import User, { usernameRegex, emailRegex, passwordRegex, SALT_ROUNDS } from "../../schemas/User";
 import bcrypt from "bcrypt";
 import generateVerificationCode from "../../util/generateVerificationCode";
 
@@ -102,7 +97,7 @@ export default async function signup(req: Request, res: Response) {
     .then(async (usr) => {
       req.session.user = { id: usr._id, username: usr.username };
 
-      res.status(200).json({
+      res.status(201).json({
         message: "User created!",
       });
 

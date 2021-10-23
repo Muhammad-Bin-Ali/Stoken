@@ -15,7 +15,7 @@ export const SALT_ROUNDS = 10;
 export interface IEmail {
   address: string;
   addressLower: string; // used to index
-  verified: false;
+  verified: boolean;
   verificationCode?: string;
   verificationExpiry?: Date;
 }
