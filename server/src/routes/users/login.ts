@@ -55,7 +55,7 @@ export default async function login(req: Request, res: Response) {
     req.session.user = { id: userDoc._id, username: userDoc.username };
 
     res.status(200).json({
-      message: "Authenticated",
+      message: "Authenticated!",
     });
   });
 }
