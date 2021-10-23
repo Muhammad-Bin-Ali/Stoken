@@ -12,6 +12,5 @@ app.post("/users", signup);
 app.post("/login", login);
 app.post("/logout", logout);
 
-app.use(isAuthenticated).post("/verifyEmail", verifyEmail);
-
+app.post("/verifyEmail", isAuthenticated, verifyEmail);
 app.all("*", notFound);

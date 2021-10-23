@@ -52,7 +52,7 @@ export default async function login(req: Request, res: Response) {
       throw err;
     }
 
-    req.session.user = { id: userDoc._id, username: userDoc.username };
+    req.session.userId = userDoc._id;
 
     res.status(200).json({
       message: "Authenticated!",

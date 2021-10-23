@@ -7,5 +7,5 @@ POST http://{{host}}/verifyEmail HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-  "code": "aaaaaa"
+  "code": "foobar"
 }

@@ -95,7 +95,7 @@ export default async function signup(req: Request, res: Response) {
   user
     .save()
     .then(async (usr) => {
-      req.session.user = { id: usr._id, username: usr.username };
+      req.session.userId = usr._id;
 
       res.status(201).json({
         message: "User created!",

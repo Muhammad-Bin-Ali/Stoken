@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import User from "../../schemas/User";
 
 export default async function verifyEmail(req: Request, res: Response) {
-  const userId = req.session.user!.id;
+  const userId = req.session.userId as string; // we know it will be defined because of the middleware
   let guessedCode = req.body.code;
 
   if (typeof guessedCode !== "string") {
