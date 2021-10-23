@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import User, { usernameRegex, emailRegex, passwordRegex, SALT_ROUNDS } from "../../schemas/User";
 import bcrypt from "bcrypt";
 import generateVerificationCode from "../../util/generateVerificationCode";
+import { sendConfirmationEmail } from "../../email";
 
 const ONE_HOUR = 60 * 60 * 1000;
 
@@ -101,7 +102,7 @@ export default async function signup(req: Request, res: Response) {
         message: "User created!",
       });
 
-      // TODO: send verification email here
+      sendConfirmationEmail(usr.email.address, verificationCode);
     })
     .catch((err) => {
       console.log("Error creating user", err);
