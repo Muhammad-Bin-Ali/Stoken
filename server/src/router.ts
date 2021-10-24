@@ -1,4 +1,5 @@
-import app from "./index";
+import { Router } from "express";
+import isAuthenticated from "./middleware/isAuthenticated";
 
 import signup from "./routes/users/signup";
 import login from "./routes/users/login";
@@ -6,12 +7,14 @@ import logout from "./routes/users/logout";
 import verifyEmail from "./routes/users/verifyEmail";
 import notFound from "./routes/notFound";
 
-import isAuthenticated from "./middleware/isAuthenticated";
+const router = Router();
 
-app.post("/users", signup);
-app.post("/login", login);
-app.post("/logout", logout);
+router.post("/users", signup);
+router.post("/login", login);
+router.post("/logout", logout);
 
-app.post("/verifyEmail", isAuthenticated, verifyEmail);
+router.post("/verifyEmail", isAuthenticated, verifyEmail);
 
-app.all("*", notFound);
+router.all("*", notFound);
+
+export default router;

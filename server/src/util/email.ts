@@ -43,5 +43,5 @@ export function sendConfirmationEmail(recipiant: string, code: string) {
   code = code.toUpperCase();
 
   let body = `To verify your email, please enter the code <b>${code}</b> on our site.\nIf you did not create an account with us, please ignore this message.`;
-  return sendEmail(recipiant, `Your confirmation code is ${code}`, body);
+  sendEmail(recipiant, `Your confirmation code is ${code}`, body).catch(console.error);
 }
