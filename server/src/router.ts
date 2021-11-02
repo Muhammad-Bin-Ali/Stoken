@@ -6,6 +6,7 @@ import login from "./routes/users/login";
 import logout from "./routes/users/logout";
 import verifyEmail from "./routes/users/verifyEmail";
 import notFound from "./routes/notFound";
+import createToken from "./routes/tokenCreation/createToken";
 
 const router = Router();
 
@@ -14,6 +15,8 @@ router.post("/login", login);
 router.post("/logout", logout);
 
 router.post("/verifyEmail", isAuthenticated, verifyEmail);
+
+router.post("/createToken", createToken),
 
 router.all("*", notFound);
 
