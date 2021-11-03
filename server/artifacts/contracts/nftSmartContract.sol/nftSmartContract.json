@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "nftSmartContract",
+  "sourceName": "contracts/nftSmartContract.sol",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220551bebd4bffe431fed8fe9f9b9e5d093bb146d109e0764cbc6e0abd9db5ee23364736f6c63430007030033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220551bebd4bffe431fed8fe9f9b9e5d093bb146d109e0764cbc6e0abd9db5ee23364736f6c63430007030033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

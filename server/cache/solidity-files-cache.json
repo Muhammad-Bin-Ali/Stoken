@@ -1,0 +1,43 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\Users\\Muhammad\\Coding Projects\\school-wallet\\server\\contracts\\nftSmartContract.sol": {
+      "lastModificationDate": 1635862896504,
+      "contentHash": "af99d4e71c5bcbf0fb69917babe979d8",
+      "sourceName": "contracts/nftSmartContract.sol",
+      "solcConfig": {
+        "version": "0.7.3",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [],
+      "artifacts": [
+        "IPayable",
+        "IST20",
+        "Ownable",
+        "ST20",
+        "ST_Basic_Token",
+        "ServicePayer",
+        "nftSmartContract"
+      ]
+    }
+  }
+}
