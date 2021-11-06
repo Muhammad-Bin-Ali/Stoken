@@ -1,16 +1,22 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Header from "./ui/components/Header";
-import Home from "./ui/pages/Home";
+import Header2 from "./ui/components/Header2";
+import Header from "./ui/components/Header"
+import Login from "./ui/pages/Login";
 import NotFound from "./ui/pages/NotFound";
+import Test from "./ui/pages/Test";
+import Home from "./ui/pages/Home";
 
 const Routes: React.FC = () => {
   return (
     <Router>
-      <Header title="School Wallet" />
+      {/* <Header2 title="School Wallet" /> */}
+      <Header/>
       <Switch>
-        <Route component={Home} exact path="/" />
+        <Route component={Home} path="/" />
+        <Route component={Test} path="/create-token" />
+        <Route component={Login} exact path="/login" />
         <Route component={NotFound} />
       </Switch>
     </Router>

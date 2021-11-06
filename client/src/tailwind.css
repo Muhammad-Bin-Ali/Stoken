@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+    @font-face {
+        font-family: Gotham;
+        src: url(./static/fonts/Gotham/Gotham-Bold.otf) format("opentype");
+        font-weight: bold;
+    }
+}
