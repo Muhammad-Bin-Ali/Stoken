@@ -6,3 +6,5 @@ build/
 
 # environment variables
 .env.local
+
+src/tailwind.generated.css
