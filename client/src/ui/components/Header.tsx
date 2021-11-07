@@ -17,6 +17,7 @@ const Header: React.FC = () => {
             </linearGradient>
           </defs>
         </svg>
+
         <h1 className="font-Gotham text-projectCyan-dark font-bold ml-3">stoken.</h1>
       </div>
 

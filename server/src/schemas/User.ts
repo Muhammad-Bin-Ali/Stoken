@@ -12,6 +12,15 @@ export const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
 
 export const SALT_ROUNDS = 10;
 
+export interface IToken {
+  createdTimestamp: Date;
+  name: string;
+  symbol: string;
+  decimal: number;
+  supply: number;
+  contactAddress: string;
+}
+
 export interface IEmail {
   address: string;
   addressLower: string; // used to index
@@ -37,7 +46,7 @@ export interface IUser extends Document {
   email: IEmail;
   emailLower: string;
   hash: string; // password hash
-  teacher: boolean; // if the user is authorized to be a tecaher (to upload images and stuff)
+  tokens: IToken[];
 }
 
 const UserSchema = new Schema({
@@ -46,7 +55,7 @@ const UserSchema = new Schema({
   email: EmailSchema,
   hash: { type: String, required: true },
   verified: { type: Boolean, required: true, default: false },
-  teacher: { type: Boolean, required: true, default: false },
+  tokens: { type: Map, of: Object, default: [] },
 });
 
 export default model<IUser>("users", UserSchema);
