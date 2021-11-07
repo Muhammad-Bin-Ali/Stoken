@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 @layer {
   @font-face {
@@ -29,4 +30,27 @@ body {
   @apply font-Nunito font-bold text-projectGold border border-projectGold px-10 py-2 rounded hover:bg-projectGold hover:text-white duration-100 active:bg-projectGold-dark;
 }
 
-@tailwind utilities;
+.recentToken::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom right, rgba(239, 123, 129, 1), rgba(236, 163, 136, 1));
+  z-index: -1;
+  opacity: 0;
+  transition: all 0.15s ease-in-out;
+  border-radius: 0.25rem;
+}
+.recentToken:hover::before {
+  opacity: 1;
+}
+
+.inputLabel {
+  @apply block font-Nunito font-bold text-projectCyan-light mb-2.5 text-lg;
+}
+
+.inputField {
+  @apply border-gray border block w-full rounded py-1 px-3 font-Nunito font-semibold text-gray-dark focus:outline-gold duration-150;
+}

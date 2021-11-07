@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Header2 from "./ui/components/Header2";
-import Header from "./ui/components/Header"
+import Header from "./ui/components/Header";
 import Login from "./ui/pages/Login";
 import NotFound from "./ui/pages/NotFound";
 import Test from "./ui/pages/Test";
@@ -12,7 +12,7 @@ const Routes: React.FC = () => {
   return (
     <Router>
       {/* <Header2 title="School Wallet" /> */}
-      <Header/>
+      <Header />
       <Switch>
         <Route component={Home} path="/" />
         <Route component={Test} path="/create-token" />
