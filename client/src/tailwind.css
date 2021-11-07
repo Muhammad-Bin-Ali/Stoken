@@ -1,11 +1,32 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 @layer {
-    @font-face {
-        font-family: Gotham;
-        src: url(./static/fonts/Gotham/Gotham-Bold.otf) format("opentype");
-        font-weight: bold;
-    }
+  @font-face {
+    font-family: Gotham;
+    src: url(./static/fonts/Gotham/Gotham-Bold.otf) format("opentype");
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: Gotham;
+    src: url(./static/fonts/Gotham/GothamMedium.ttf) format("truetype");
+    font-weight: normal;
+  }
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap");
+
+.navLink {
+  @apply font-Gotham font-bold mr-20 text-projectCyan;
+}
+
+body {
+  background-color: #fcfcfc;
+}
+
+.actionButton {
+  @apply font-Nunito font-bold text-projectGold border border-projectGold px-10 py-2 rounded hover:bg-projectGold hover:text-white duration-100 active:bg-projectGold-dark;
+}
+
+@tailwind utilities;
