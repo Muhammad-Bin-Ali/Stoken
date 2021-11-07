@@ -4,20 +4,20 @@ import RecentToken from "../components/RecentToken";
 const RecentTokenComponent: React.FC = () => {
   const [recentTokens, setRecentTokens] = useState([
     {
-      name: "Test data 1",
+      name: "Test Data 1",
       symbol: "TDA1",
       date: "10th September 2021",
       id: 0,
     },
     {
-      name: "Test data 2",
+      name: "Test Data 2",
       symbol: "TDA2",
       date: "10th September 2021",
       id: 1,
     },
     {
-      name: "Test data 3",
-      symbol: "TDA",
+      name: "Test Data 3",
+      symbol: "TDA3",
       date: "10th September 2021",
       id: 2,
     },

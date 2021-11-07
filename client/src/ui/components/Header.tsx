@@ -2,7 +2,7 @@ import React from "react";
 
 const Header: React.FC = () => {
   return (
-    <div className="mainHeader flex justify-between w:full mx-64 mt-10 items-center">
+    <div className="mainHeader flex justify-between w:full 2xl:mx-64 xl:mx-60 sm:mx-32 mt-10 items-center">
       <div className="logo flex items-center">
         <svg className="w-auto h-9" width="46" height="49" viewBox="0 0 46 49" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
