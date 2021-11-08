@@ -19,12 +19,12 @@ const LoginForm: React.FC = () => {
     const password = passwordRef.current?.value;
 
     if (!user) {
-      setMessage("You need to provide a username or email!");
+      setMessage("Please enter a username or email");
       return;
     }
 
     if (!password) {
-      setMessage("You need to provide a password!");
+      setMessage("You need to provide a password");
       return;
     }
 
@@ -44,22 +44,29 @@ const LoginForm: React.FC = () => {
   };
   //The HTML attributes/elements for creating the basic parts of the UI and uses props for button (as the text and the onClick function changes)
   return (
-    <div className="logincontainer">
-      <form>
-        <h1>Login Form</h1>
-        <label htmlFor="username">Username:</label>
-        <br></br>
-        <input ref={usernameRef} type="text" id="username" name="username" />
-        <br></br>
-        <label htmlFor="password">Password:</label>
-        <br></br>
-        <input ref={passwordRef} type="password" id="password" name="password" />
-        <br></br>
-        <button className="btn" onClick={handleLogin}>
-          Login
+    <div className="logincontainer flex flex-col">
+      <h1 className="font-Gotham font-bold text-projectCyan-dark text-3xl mt-24 mb-7">log in.</h1>
+
+      <form className="flex flex-col">
+        <div>
+          <label className="inputLabel" htmlFor="username">
+            username or email:
+          </label>
+          <input className="inputField" ref={usernameRef} type="text" id="username" name="username" />
+        </div>
+        <div>
+          <label className="inputLabel mt-3.5" htmlFor="password">
+            password:
+          </label>
+          <input className="inputField" ref={passwordRef} type="password" id="password" name="password" />
+        </div>
+
+        <button className="font-Nunito font-bold py-2 px-10 rounded bg-gradient-to-br from-pink to-beige border-none text-white duration-150 hover:from-pinkBright hover:to-beigeBright mt-10" onClick={handleLogin}>
+          Submit
         </button>
       </form>
-      {message ? <p>{message}</p> : null}
+
+      {message ? <p className="w-full font-Nunito text-red text-xs mt-6 font-normal">{message}</p> : null}
     </div>
   );
 };

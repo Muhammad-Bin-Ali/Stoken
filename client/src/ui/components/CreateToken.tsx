@@ -25,6 +25,10 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
   const tokenCreationFunction: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
+    if (!requestDone) {
+      return;
+    }
+
     //do nothing if validityInput JSON object contains false
     if (Object.values(validityInput).includes(false)) {
       return;
@@ -38,9 +42,11 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
     const data: TokenDataType = {
       name: tokenData.name,
       symbol: tokenData.symbol,
-      supply: tokenData.supply,
-      decimal: tokenData.decimal,
+      supply: Number(tokenData.supply),
+      decimal: Number(tokenData.decimal),
     };
+
+    console.log(typeof data.supply);
 
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/createToken`, data, { withCredentials: true })
@@ -53,7 +59,7 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
         setAddress({ visible: true, address: data.message });
 
         console.log("Tokens", data.tokens);
-        setTokens(data.tokens);
+        if (tokens) setTokens(data.tokens);
       })
       .catch((err) => {
         setTokenData({ name: "", symbol: "", supply: 1, decimal: 0 });

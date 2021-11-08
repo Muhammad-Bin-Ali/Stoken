@@ -10,11 +10,11 @@ const Landing: React.FC = () => {
     if (isLoggedIn) {
       history.push("/dashboard");
     }
-  }, []);
+  }, [isLoggedIn]);
 
   return (
-    <div>
-      <p>Log In or Sign up to get started!</p>
+    <div className=" 2xl:mx-96 2xl:mx-72 xl:mx-64 lg:mx-52 sm:mx-32 mt-20">
+      <p className=" flex justify-center item-center mt-20 font-Gotham font-bold text-projectCyan text-lg ">Log In or Sign up to get started! (Landing page is under construction)</p>
     </div>
   );
 };

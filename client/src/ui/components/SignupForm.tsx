@@ -13,6 +13,8 @@ const SignUpForm: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
+
   const history = useHistory();
   const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn");
 
@@ -23,24 +25,25 @@ const SignUpForm: React.FC = () => {
     const email = emailRef.current?.value;
     const username = usernameRef.current?.value;
     const password = passwordRef.current?.value;
+    const confirmPassword = passwordRef.current?.value;
 
     if (!email) {
-      setMessage("You need to provide an email!");
+      setMessage("Please provide an email");
       return;
     }
 
     if (!username) {
-      setMessage("You need to provide a username!");
+      setMessage("Please provide a username");
       return;
     }
 
     if (!password) {
-      setMessage("You need to provide a password!");
+      setMessage("Please provide a password");
       return;
     }
 
     if (!email.match(emailRegex)) {
-      setMessage("You need to provide a valid email!");
+      setMessage("Please provide a valid email");
       return;
     }
 
@@ -64,6 +67,11 @@ const SignUpForm: React.FC = () => {
       return;
     }
 
+    if (password !== confirmPassword) {
+      setMessage("Confirmed password is different than original password");
+      return;
+    }
+
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/users`, { email, username, password }, { withCredentials: true })
       .then((res) => {
@@ -80,26 +88,45 @@ const SignUpForm: React.FC = () => {
   };
   //The HTML attributes/elements for creating the basic parts of the UI and uses props for button (as the text and the onClick function changes)
   return (
-    <div className="signupcontainer">
-      <form>
-        <h1>Sign Up Form</h1>
-        <label htmlFor="username">Email:</label>
-        <br></br>
-        <input ref={emailRef} type="text" id="email" name="email" />
-        <br></br>
-        <label htmlFor="username">Username:</label>
-        <br></br>
-        <input ref={usernameRef} type="text" id="username" name="username" />
-        <br></br>
-        <label htmlFor="password">Password:</label>
-        <br></br>
-        <input ref={passwordRef} type="password" id="password" name="password" />
-        <br></br>
-        <button className="btn" onClick={handleSignup}>
+    <div className="signupcontainer flex flex-col">
+      <h1 className="font-Gotham font-bold text-projectCyan-dark mt-12 text-3xl ">get started.</h1>
+      <form className="flex flex-col mt-12">
+        <div>
+          <label className="inputLabel" htmlFor="email">
+            email
+          </label>
+
+          <input className="inputField" ref={emailRef} type="email" id="email" name="email" />
+        </div>
+
+        <div className="mt-2">
+          <label className="inputLabel" htmlFor="username">
+            username
+          </label>
+
+          <input className="inputField" ref={usernameRef} type="text" id="username" name="username" />
+        </div>
+
+        <div className="mt-2">
+          <label className="inputLabel" htmlFor="password">
+            password
+          </label>
+
+          <input className="inputField" ref={passwordRef} type="password" id="password" name="password" />
+        </div>
+        <div className="mt-2">
+          <label className="inputLabel" htmlFor="username">
+            confirm password
+          </label>
+
+          <input className="inputField" ref={confirmPasswordRef} type="password" id="confirm-password" name="confirm-password" />
+        </div>
+
+        <button className="font-Nunito font-bold py-2 px-10 rounded bg-gradient-to-br from-pink to-beige border-none text-white duration-150 hover:from-pinkBright hover:to-beigeBright mt-10" onClick={handleSignup}>
           Sign Up
         </button>
       </form>
-      {message ? <p>{message}</p> : null}
+      {message ? <p className="w-full font-Nunito text-red text-xs mt-6 font-normal">{message}</p> : null}
     </div>
   );
 };

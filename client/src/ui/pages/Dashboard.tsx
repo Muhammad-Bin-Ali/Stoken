@@ -16,7 +16,7 @@ const Dashboard: React.FC = () => {
     if (!isLoggedIn) {
       history.push("/");
     }
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     axios

@@ -46,13 +46,14 @@ const Header: React.FC<any> = () => {
             <Link to="/login" className="actionButton">
               Login
             </Link>
-            <Link to="/signup" className="actionButton">
-              Sign Up
+            <Link to="/signup" className="font-Nunito font-bold bg-projectGold text-white text-projectGold border border-projectGold px-5 py-2 rounded hover:bg-projectGold-dark hover:text-white duration-100 active:bg-projectGold-dark ml-8">
+              Get Started
             </Link>
           </>
         ) : (
           <>
             <button
+              className="actionButton"
               onClick={() => {
                 axios.post(`${process.env.REACT_APP_SERVER_URL}/logout`, {}, { withCredentials: true }).then(() => {
                   history.push("/");
