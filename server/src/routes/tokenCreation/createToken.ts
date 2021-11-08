@@ -48,18 +48,22 @@ export default async function createToken(req: Request, res: Response) {
     return;
   }
 
+  console.log("FUCKOFF");
+
   deployToken(name, symbol, decimal, supply)
     .then((response: Address) => {
       const contactAddress = response.address;
       const token: IToken = { id: uuidv4(), name, symbol, decimal, supply, contactAddress, createdTimestamp: new Date() };
 
+      console.log(token);
       console.log(user);
+      console.log(user.tokens);
 
       user.tokens.push(token);
       user.save().then(() => {
         res.status(202).json({
           message: response.address,
-          tokens: user.tokens,
+          tokens: user.tokens ?? [],
         });
       });
     })
