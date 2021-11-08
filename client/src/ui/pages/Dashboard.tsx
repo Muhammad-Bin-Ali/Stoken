@@ -1,10 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RecentTokenComponent from "../components/RecentTokenComponent";
 import CreateToken from "../components/CreateToken";
 import PastTokensCreatedComponent from "../components/PastTokensCreatedComponent";
+import { useGlobalState, Token } from "../..";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
-const Home: React.FC = () => {
+const Dashboard: React.FC = () => {
   const [openCreateToken, setOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn");
+  const [tokens, setTokens] = useGlobalState("tokens");
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      history.push("/");
+    }
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/getTokens`, { withCredentials: true })
+      .then((res) => {
+        const data: any = res.data;
+        const newTokens: Token[] = data.tokens;
+
+        console.log(newTokens);
+        setTokens(newTokens);
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        if (err?.response?.status === 401) {
+          console.log("401 :)");
+          setIsLoggedIn(false);
+        }
+      });
+  }, []);
 
   const onCloseFunc = () => {
     setOpen(false);
@@ -31,4 +62,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

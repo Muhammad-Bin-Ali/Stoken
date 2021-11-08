@@ -1,35 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { Token, useGlobalState } from "../..";
 import RecentToken from "../components/RecentToken";
+import axios from "axios";
 
 const RecentTokenComponent: React.FC = () => {
-  const [recentTokens, setRecentTokens] = useState([
-    {
-      name: "Test Data 1",
-      symbol: "TDA1",
-      date: "10th September 2021",
-      id: 0,
-    },
-    {
-      name: "Test Data 2",
-      symbol: "TDA2",
-      date: "10th September 2021",
-      id: 1,
-    },
-    {
-      name: "Test Data 3",
-      symbol: "TDA3",
-      date: "10th September 2021",
-      id: 2,
-    },
-  ]);
+  const [tokens, setTokens] = useGlobalState("tokens");
 
-  const getFormattedTokens = () => {
-    return recentTokens.map((Token) => {
-      return <RecentToken key={Token.id} token={Token} />;
-    });
-  };
+  if (tokens.length < 1) {
+    return (
+      <div>
+        <p>No recent tokens created, try creating one!</p>
+      </div>
+    );
+  }
 
-  return <div className="grid grid-cols-3 item-center justify-items-center gap-x-10 mt-8">{getFormattedTokens}</div>;
+  return (
+    <div className="grid grid-cols-3 item-center justify-items-center gap-x-10 mt-8">
+      {tokens.slice(-3).map((token) => {
+        return <RecentToken key={token.id} token={token} />;
+      })}
+    </div>
+  );
 };
 
 export default RecentTokenComponent;

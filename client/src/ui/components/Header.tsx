@@ -1,7 +1,14 @@
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useGlobalState } from "../..";
+import { useHistory } from "react-router-dom";
 
 const Header: React.FC<any> = () => {
+  const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn");
+  const [tokens, setTokens] = useGlobalState("tokens");
+  const history = useHistory();
+
   return (
     <div className="mainHeader flex justify-between w:full 2xl:mx-64 xl:mx-60 sm:mx-32 mt-10 items-center">
       <div className="logo flex items-center">
@@ -21,18 +28,43 @@ const Header: React.FC<any> = () => {
 
         <h1 className="font-Gotham text-projectCyan-dark font-bold ml-3">stoken.</h1>
       </div>
-
       <nav className="navBar">
-        <a href="#" className="navLink">
-          dashboard
-        </a>
-        <a href="#" className="navLink">
-          check wallet
-        </a>
+        {isLoggedIn ? (
+          <>
+            <Link to="/dashboard" className="navLink">
+              dashboard
+            </Link>
 
-        <Link to="/login" className="actionButton">
-          Log in
-        </Link>
+            <Link to="/checkWallet" className="navLink">
+              check wallet
+            </Link>
+          </>
+        ) : null}
+
+        {!isLoggedIn ? (
+          <>
+            <Link to="/login" className="actionButton">
+              Login
+            </Link>
+            <Link to="/signup" className="actionButton">
+              Sign Up
+            </Link>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() => {
+                axios.post(`${process.env.REACT_APP_SERVER_URL}/logout`, {}, { withCredentials: true }).then(() => {
+                  history.push("/");
+                  setIsLoggedIn(false);
+                  setTokens([]);
+                });
+              }}
+            >
+              Logout
+            </button>
+          </>
+        )}
       </nav>
     </div>
   );

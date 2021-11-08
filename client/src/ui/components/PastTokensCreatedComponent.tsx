@@ -1,55 +1,22 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import PastToken from "./PastToken";
-
-interface Token {
-  name: string;
-  symbol: string;
-  date: string;
-  id: number;
-  supply: number;
-  decimal: number;
-}
+import { useGlobalState, Token } from "../../index";
 
 interface RecentTokenProps {
   token: Token[];
 }
 
 const PastTokensCreatedComponent: React.FC = ({}) => {
-  const [tokensArray, setTokens] = useState([
-    //link your little data stuff here this is for display
-    {
-      name: "First Aid Certification",
-      symbol: "FAC",
-      date: "10/09/2021",
-      id: 0,
-      supply: 1,
-      decimal: 0,
-    },
-    {
-      name: "First Aid Certification",
-      symbol: "FAC2",
-      date: "10/09/2021",
-      id: 1,
-      supply: 3,
-      decimal: 0,
-    },
-    {
-      name: "First Aid Certification",
-      symbol: "FAC2",
-      date: "10/09/2021",
-      id: 3,
-      supply: 3,
-      decimal: 0,
-    },
-    {
-      name: "First Aid Certification",
-      symbol: "FAC2",
-      date: "10/09/2021",
-      id: 4,
-      supply: 3,
-      decimal: 0,
-    },
-  ]);
+  const [tokens, setTokens] = useGlobalState("tokens");
+
+  if (tokens.length < 1) {
+    return (
+      <div>
+        <p>No past tokens created, try creating one!</p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full mt-8 mb-32">
@@ -62,8 +29,8 @@ const PastTokensCreatedComponent: React.FC = ({}) => {
       </div>
       <hr className="border-1 border-projectGold"></hr>
 
-      {tokensArray.map((Token: Token) => {
-        return <PastToken key={Token.id} token={Token} />;
+      {tokens.map((token: Token) => {
+        return <PastToken key={token.id} token={token} />;
       })}
     </div>
   );

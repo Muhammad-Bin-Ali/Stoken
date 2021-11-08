@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useGlobalState } from "../..";
 
 interface TokenDataType {
   name: string;
@@ -19,6 +20,7 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
   const [requestDone, setDone] = useState(true);
   const [ableToClose, setAbleToClose] = useState(true);
   const [contractAddress, setAddress] = useState({ visible: false, address: "" });
+  const [tokens, setTokens] = useGlobalState("tokens");
 
   const tokenCreationFunction: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -49,6 +51,9 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
         setAbleToClose(true);
         console.log(data.message);
         setAddress({ visible: true, address: data.message });
+
+        console.log("Tokens", data.tokens);
+        setTokens(data.tokens);
       })
       .catch((err) => {
         setTokenData({ name: "", symbol: "", supply: 1, decimal: 0 });

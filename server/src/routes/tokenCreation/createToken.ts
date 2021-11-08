@@ -59,7 +59,7 @@ export default async function createToken(req: Request, res: Response) {
       user.save().then(() => {
         res.status(202).json({
           message: response.address,
-          token,
+          tokens: user.tokens,
         });
       });
     })
