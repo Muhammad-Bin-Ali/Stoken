@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { useGlobalState } from "../../index";
 
 //This is the React Component LoginForm which takes in an argument for text and outputs basic UI for login screen
 const LoginForm: React.FC = () => {
@@ -8,6 +9,7 @@ const LoginForm: React.FC = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const history = useHistory();
+  const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn");
 
   //Function for when the button is clicked (routes to authentication scripts)
   const handleLogin = (e: any) => {
@@ -32,12 +34,12 @@ const LoginForm: React.FC = () => {
         const data: any = res.data;
         console.log(data.message);
 
+        setIsLoggedIn(true);
+
         history.push("/");
       })
       .catch((err) => {
-        const data: any = err.response.data;
-
-        setMessage(data.message);
+        setMessage(err.response?.data?.message);
       });
   };
   //The HTML attributes/elements for creating the basic parts of the UI and uses props for button (as the text and the onClick function changes)

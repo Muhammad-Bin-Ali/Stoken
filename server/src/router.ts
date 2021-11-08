@@ -17,7 +17,7 @@ router.post("/logout", logout);
 
 router.post("/verifyEmail", isAuthenticated, verifyEmail);
 
-router.post("/createToken", createToken);
+router.post("/createToken", isAuthenticated, createToken);
 router.get("/getTokens", isAuthenticated, getTokens);
 
 router.all("*", notFound);

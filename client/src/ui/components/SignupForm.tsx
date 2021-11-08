@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
+import { useGlobalState } from "../../index";
 
 export const usernameRegex = /^[a-zA-Z0-9_]{3,16}$/gm;
 export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -13,6 +14,7 @@ const SignUpForm: React.FC = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const history = useHistory();
+  const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn");
 
   //Function for when the button is clicked (routes to the account creation/storage scripts)
   const handleSignup = (e: any) => {
@@ -68,11 +70,12 @@ const SignUpForm: React.FC = () => {
         const data: any = res.data;
         console.log(data.message);
 
+        setIsLoggedIn(true);
+
         history.push("/");
       })
       .catch((err) => {
-        const data: any = err.response.data;
-        setMessage(data.message);
+        setMessage(err.response?.data?.message);
       });
   };
   //The HTML attributes/elements for creating the basic parts of the UI and uses props for button (as the text and the onClick function changes)

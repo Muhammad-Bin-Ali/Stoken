@@ -41,7 +41,7 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
     };
 
     axios
-      .post("http://localhost:8080/createToken", data)
+      .post(`${process.env.REACT_APP_SERVER_URL}/createToken`, data, { withCredentials: true })
       .then((res) => {
         setTokenData({ name: "", symbol: "", supply: 1, decimal: 0 });
         const data: any = res.data;

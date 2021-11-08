@@ -8,7 +8,7 @@ interface TokenDataType {
   decimal: number;
 }
 
-const Test: React.FC = () => {
+const Test: React.FC<any> = () => {
   const [tokenData, setTokenData] = useState<TokenDataType>({ name: "", symbol: "", supply: 0, decimal: 0 });
 
   //method to deal with changes in input fields

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header: React.FC = () => {
+const Header: React.FC<any> = () => {
   return (
     <div className="mainHeader flex justify-between w:full 2xl:mx-64 xl:mx-60 sm:mx-32 mt-10 items-center">
       <div className="logo flex items-center">

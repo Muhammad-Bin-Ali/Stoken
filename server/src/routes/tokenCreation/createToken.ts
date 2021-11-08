@@ -40,12 +40,20 @@ export default async function createToken(req: Request, res: Response) {
 
   const userId = req.session.userId!;
   const user = await User.findById(userId);
-  if (!user) throw "User not found";
+
+  if (!user) {
+    res.status(500).json({
+      message: "User not found",
+    });
+    return;
+  }
 
   deployToken(name, symbol, decimal, supply)
     .then((response: Address) => {
       const contactAddress = response.address;
       const token: IToken = { id: uuidv4(), name, symbol, decimal, supply, contactAddress, createdTimestamp: new Date() };
+
+      console.log(user);
 
       user.tokens.push(token);
       user.save().then(() => {
