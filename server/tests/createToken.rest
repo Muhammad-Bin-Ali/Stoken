@@ -1,0 +1,14 @@
+@hostname = localhost
+@port = 8080
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+POST http://{{host}}/createToken HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "name": "Test123",
+  "symbol": "tst",
+  "decimal": 0,
+  "supply": 2
+}
