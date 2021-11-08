@@ -54,3 +54,11 @@ body {
 .inputField {
   @apply border-gray border block w-full rounded py-1 px-3 font-Nunito font-semibold text-gray-dark focus:outline-gold duration-150;
 }
+
+.pastTokenLabel {
+  @apply ml-4 font-Nunito font-bold text-projectCyan-light text-sm;
+}
+
+.pinkButton {
+  @apply font-Nunito font-bold py-2 rounded px-11 bg-gradient-to-br from-pink to-beige border-none text-white duration-75;
+}
