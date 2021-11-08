@@ -36,7 +36,7 @@ app.use(
     cookie: {
       httpOnly: true,
       sameSite: "strict",
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       maxAge: ONE_WEEK_SECONDS * 1000,
     },
     store: MongoStore.create({
