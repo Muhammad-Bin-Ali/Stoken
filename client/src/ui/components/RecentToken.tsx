@@ -12,7 +12,6 @@ interface RecentTokenProps {
 }
 
 const RecentToken: React.FC<RecentTokenProps> = ({ token }) => {
-  console.log(token);
   return (
     <div className="recentToken relative z-10 bg-gradient-to-br from-white to-white w-full h-80 bg-opacity-0 shadow-custom rounded group transition transform duration-100 hover:scale-105">
       <div className="h-60 grid grid-rows-custom my-10 mx-10">

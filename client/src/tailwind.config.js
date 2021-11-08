@@ -16,7 +16,13 @@ module.exports = {
       },
       white: colors.white,
       pink: "#EF7B81",
+      pinkGrad: "#EF7B81",
+      pinkBright: "#F2636A",
+      pinkLight: "#F99A9F",
+      beigeBright: "#E39071",
+      beigeLight: "#F4BAA5",
       beige: "#ECA388",
+      beigeGrad: "#ECA388",
       gray: {
         DEFAULT: "#C7C7C7",
         dark: "#929292",
@@ -49,11 +55,15 @@ module.exports = {
         gold: ["1px solid #AD978D"],
         gray: ["1px solid #929292"],
       },
+      gridTemplateColumns: {
+        custom: "1fr 1fr 1fr 0.5fr 0.5fr 0.5fr 1fr",
+      },
     },
   },
   variants: {
     extend: {
       backgroundColor: ["active"],
+      backgroundImage: ["hover", "active", "focus"],
     },
   },
   plugins: [],

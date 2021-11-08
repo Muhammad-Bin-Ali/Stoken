@@ -16,6 +16,9 @@ interface openPropType {
 const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
   const [tokenData, setTokenData] = useState<TokenDataType>({ name: "", symbol: "", supply: 1, decimal: 0 });
   const [validityInput, setValidity] = useState({ name: true, symbol: true, supply: true, decimal: true });
+  const [requestDone, setDone] = useState(true);
+  const [ableToClose, setAbleToClose] = useState(true);
+  const [contractAddress, setAddress] = useState({ visible: false, address: "" });
 
   const tokenCreationFunction: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -25,6 +28,11 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
       return;
     }
 
+    if (tokenData.name === "" || tokenData.symbol === "") {
+      return;
+    }
+
+    setDone(false);
     const data: TokenDataType = {
       name: tokenData.name,
       symbol: tokenData.symbol,
@@ -32,12 +40,23 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
       decimal: tokenData.decimal,
     };
 
-    setTokenData({ name: "", symbol: "", supply: 1, decimal: 0 });
-
-    // axios.post("http://localhost:8080/createToken", data).then((res) => {
-    //   const data: any = res.data;
-    //   console.log(data.message);
-    // });
+    axios
+      .post("http://localhost:8080/createToken", data)
+      .then((res) => {
+        setTokenData({ name: "", symbol: "", supply: 1, decimal: 0 });
+        const data: any = res.data;
+        setDone(true);
+        setAbleToClose(true);
+        console.log(data.message);
+        setAddress({ visible: true, address: data.message });
+      })
+      .catch((err) => {
+        setTokenData({ name: "", symbol: "", supply: 1, decimal: 0 });
+        const data: any = err.response.data;
+        setDone(true);
+        setAbleToClose(true);
+        console.log(data.message);
+      });
   };
 
   const onInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -95,7 +114,12 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
 
   //function to close sideBar
   const closeSide: React.MouseEventHandler<SVGSVGElement> = (event) => {
-    onClose();
+    //if request isn't finished yet, then prompt user that they can't close yet
+    if (!requestDone) setAbleToClose(false);
+    else {
+      onClose();
+      setAddress({ visible: false, address: "" });
+    }
   };
 
   return (
@@ -128,10 +152,16 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
         <p className={"w-full font-Nunito text-red text-xs mt-2" + " " + (validityInput.supply ? "hidden" : "inline")}>Supply must be greater than 0</p>
         <p className={"w-full font-Nunito text-red text-xs mt-2" + " " + (validityInput.decimal ? "hidden" : "inline")}>Decimal must be between 0 and 18</p>
         <p className={"w-full font-Nunito text-red text-xs mt-2" + " " + (validityInput.symbol ? "hidden" : "inline")}>Symbol must be less than 10 characters</p>
-        <button className="block mt-20 font-Nunito font-bold py-2 rounded px-11 bg-gradient-to-br from-pink to-beige border-none text-white duration-75  " type="submit">
+        <button className="block pinkButton mt-20 hover:from-pinkBright hover:to-beigeBright" type="submit">
           Create
         </button>
       </form>
+
+      <h3 className={"w-full font-Nunito text-red text-xs mt-14" + " " + (ableToClose ? "hidden" : "inline")}>Please wait till your request has been fulfilled to close the side bar</h3>
+      <div className={"mt-14 max-w-8" + " " + (contractAddress.visible ? "inline" : "hidden")}>
+        <h2 className="block font-Nunito font-bold text-projectCyan text-lg">Address of Created Token</h2>
+        <h2 className="block font-Nunito font-medium text-gray text-lg break-words">0x8a832D1E189c2EeDEF2590A207cBb9CF6CDC3D9B</h2>
+      </div>
     </div>
   );
 };
