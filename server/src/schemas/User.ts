@@ -14,6 +14,7 @@ export const SALT_ROUNDS = 10;
 
 export interface IToken {
   createdTimestamp: Date;
+  id: string;
   name: string;
   symbol: string;
   decimal: number;
@@ -55,7 +56,7 @@ const UserSchema = new Schema({
   email: EmailSchema,
   hash: { type: String, required: true },
   verified: { type: Boolean, required: true, default: false },
-  tokens: { type: Map, of: Object, default: [] },
+  tokens: { type: Array, default: [] },
 });
 
 export default model<IUser>("users", UserSchema);

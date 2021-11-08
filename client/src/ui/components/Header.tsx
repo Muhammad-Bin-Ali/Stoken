@@ -1,6 +1,14 @@
+import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
+import { useGlobalState } from "../..";
+import { useHistory } from "react-router-dom";
 
-const Header: React.FC = () => {
+const Header: React.FC<any> = () => {
+  const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn");
+  const [tokens, setTokens] = useGlobalState("tokens");
+  const history = useHistory();
+
   return (
     <div className="mainHeader flex justify-between w:full 2xl:mx-64 xl:mx-60 sm:mx-32 mt-10 items-center">
       <div className="logo flex items-center">
@@ -20,15 +28,44 @@ const Header: React.FC = () => {
 
         <h1 className="font-Gotham text-projectCyan-dark font-bold ml-3">stoken.</h1>
       </div>
-
       <nav className="navBar">
-        <a href="#" className="navLink">
-          dashboard
-        </a>
-        <a href="#" className="navLink">
-          check wallet
-        </a>
-        <button className="actionButton">Log in</button>
+        {isLoggedIn ? (
+          <>
+            <Link to="/dashboard" className="navLink">
+              dashboard
+            </Link>
+
+            <Link to="/checkWallet" className="navLink">
+              check wallet
+            </Link>
+          </>
+        ) : null}
+
+        {!isLoggedIn ? (
+          <>
+            <Link to="/login" className="actionButton">
+              Login
+            </Link>
+            <Link to="/signup" className="font-Nunito font-bold bg-projectGold text-white text-projectGold border border-projectGold px-5 py-2 rounded hover:bg-projectGold-dark hover:text-white duration-100 active:bg-projectGold-dark ml-8">
+              Get Started
+            </Link>
+          </>
+        ) : (
+          <>
+            <button
+              className="actionButton"
+              onClick={() => {
+                axios.post(`${process.env.REACT_APP_SERVER_URL}/logout`, {}, { withCredentials: true }).then(() => {
+                  history.push("/");
+                  setIsLoggedIn(false);
+                  setTokens([]);
+                });
+              }}
+            >
+              Logout
+            </button>
+          </>
+        )}
       </nav>
     </div>
   );

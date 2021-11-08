@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useGlobalState } from "../..";
 
 interface TokenDataType {
   name: string;
@@ -19,9 +20,14 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
   const [requestDone, setDone] = useState(true);
   const [ableToClose, setAbleToClose] = useState(true);
   const [contractAddress, setAddress] = useState({ visible: false, address: "" });
+  const [tokens, setTokens] = useGlobalState("tokens");
 
   const tokenCreationFunction: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+
+    if (!requestDone) {
+      return;
+    }
 
     //do nothing if validityInput JSON object contains false
     if (Object.values(validityInput).includes(false)) {
@@ -32,16 +38,22 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
       return;
     }
 
+    if (!requestDone) {
+      return;
+    }
+
     setDone(false);
     const data: TokenDataType = {
       name: tokenData.name,
       symbol: tokenData.symbol,
-      supply: tokenData.supply,
-      decimal: tokenData.decimal,
+      supply: Number(tokenData.supply),
+      decimal: Number(tokenData.decimal),
     };
 
+    console.log(typeof data.supply);
+
     axios
-      .post("http://localhost:8080/createToken", data)
+      .post(`${process.env.REACT_APP_SERVER_URL}/createToken`, data, { withCredentials: true })
       .then((res) => {
         setTokenData({ name: "", symbol: "", supply: 1, decimal: 0 });
         const data: any = res.data;
@@ -49,13 +61,18 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
         setAbleToClose(true);
         console.log(data.message);
         setAddress({ visible: true, address: data.message });
+
+        console.log("Tokens", data.tokens);
+        if (tokens) setTokens(data.tokens);
       })
       .catch((err) => {
         setTokenData({ name: "", symbol: "", supply: 1, decimal: 0 });
         const data: any = err.response.data;
         setDone(true);
         setAbleToClose(true);
-        console.log(data.message);
+        if (data.message) {
+          console.log(data.message);
+        }
       });
   };
 

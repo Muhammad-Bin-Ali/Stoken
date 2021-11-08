@@ -11,6 +11,8 @@ export default async function signup(req: Request, res: Response) {
   const email = req.body.email;
   const password = req.body.password;
 
+  console.log("signup");
+
   // validation!
 
   if (typeof username !== "string") {
@@ -97,6 +99,9 @@ export default async function signup(req: Request, res: Response) {
     .save()
     .then(async (usr) => {
       req.session.userId = usr._id;
+
+      console.log(":(");
+      console.log(usr);
 
       res.status(201).json({
         message: "User created!",
