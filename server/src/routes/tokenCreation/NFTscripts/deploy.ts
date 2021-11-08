@@ -9,12 +9,5 @@ export default async function deployToken(name: String, symbol: String, decimal:
 
   // console.log("Contract deployed to address:", deployedContract.address);
 
-  return {address: deployedContract.address}
+  return { address: deployedContract.address };
 }
-
-deployToken("Coding Beanstalk Certification", "CBSC", 0, 1)
-  .then(() => process.exit(0))
-  .catch(error => {
-    console.error(error);
-    process.exit(1);
-  });

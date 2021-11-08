@@ -56,7 +56,7 @@ body {
 }
 
 .pastTokenLabel {
-  @apply ml-4 font-Nunito font-bold text-projectCyan-light text-sm;
+  @apply font-Nunito font-bold text-projectCyan-light text-base;
 }
 
 .pinkButton {
