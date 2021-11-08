@@ -32,6 +32,10 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
       return;
     }
 
+    if (!requestDone) {
+      return;
+    }
+
     setDone(false);
     const data: TokenDataType = {
       name: tokenData.name,
@@ -47,15 +51,19 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
         const data: any = res.data;
         setDone(true);
         setAbleToClose(true);
-        console.log(data.message);
-        setAddress({ visible: true, address: data.message });
+        if (data.message) {
+          console.log(data.message);
+          setAddress({ visible: true, address: data.message });
+        }
       })
       .catch((err) => {
         setTokenData({ name: "", symbol: "", supply: 1, decimal: 0 });
         const data: any = err.response.data;
         setDone(true);
         setAbleToClose(true);
-        console.log(data.message);
+        if (data.message) {
+          console.log(data.message);
+        }
       });
   };
 

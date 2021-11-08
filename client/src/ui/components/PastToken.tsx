@@ -21,7 +21,7 @@ const pastToken: React.FC<TokenPropType> = ({ token }) => {
       <h3 className="pastTokenLabel">{token.symbol}</h3>
       <h3 className="pastTokenLabel">{token.supply}</h3>
       <h3 className="pastTokenLabel">{token.decimal}</h3>
-      <button className="col-span-1 font-Nunito font-bold py-2 rounded mx-8 bg-gradient-to-br from-pink to-beige border-none text-white duration-150 hover:from-pinkBright hover:to-beigeBright">Visit Token</button>
+      <button className="col-span-1 font-Nunito font-bold py-2 rounded mx-8 bg-gradient-to-br from-pink to-beige border-none text-white duration-150 hover:from-pinkBright hover:to-beigeBright lg:text-sm">Visit Token</button>
     </div>
   );
 };
