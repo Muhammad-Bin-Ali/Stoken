@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
@@ -28,7 +29,10 @@ const Header: React.FC = () => {
         <a href="#" className="navLink">
           check wallet
         </a>
-        <button className="actionButton">Log in</button>
+
+        <Link to="/login" className="actionButton">
+          Log in
+        </Link>
       </nav>
     </div>
   );

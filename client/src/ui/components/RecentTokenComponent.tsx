@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RecentToken from "../components/RecentToken";
 
 const RecentTokenComponent: React.FC = () => {
@@ -23,13 +23,13 @@ const RecentTokenComponent: React.FC = () => {
     },
   ]);
 
-  return (
-    <div className="grid grid-cols-3 item-center justify-items-center gap-x-10 mt-8">
-      {recentTokens.map((Token) => {
-        return <RecentToken key={Token.id} token={Token} />;
-      })}
-    </div>
-  );
+  const getFormattedTokens = () => {
+    return recentTokens.map((Token) => {
+      return <RecentToken key={Token.id} token={Token} />;
+    });
+  };
+
+  return <div className="grid grid-cols-3 item-center justify-items-center gap-x-10 mt-8">{getFormattedTokens}</div>;
 };
 
 export default RecentTokenComponent;

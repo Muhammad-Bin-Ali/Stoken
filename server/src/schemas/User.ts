@@ -14,6 +14,7 @@ export const SALT_ROUNDS = 10;
 
 export interface IToken {
   createdTimestamp: Date;
+  id: string;
   name: string;
   symbol: string;
   decimal: number;

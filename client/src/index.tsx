@@ -1,8 +1,7 @@
 import React, { StrictMode } from "react";
 import { render } from "react-dom";
-import "./tailwind.generated.css";
-
 import Routes from "./Routes";
+import "./tailwind.generated.css";
 
 const jsx = (
   <StrictMode>

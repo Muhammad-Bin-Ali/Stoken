@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import deployToken from "./NFTscripts/deploy";
+import User, { IToken } from "../../schemas/User";
+import { v4 as uuidv4 } from "uuid";
 
 interface Address {
   address: string;
@@ -36,10 +38,21 @@ export default async function createToken(req: Request, res: Response) {
     return;
   }
 
+  const userId = req.session.userId!;
+  const user = await User.findById(userId);
+  if (!user) throw "User not found";
+
   deployToken(name, symbol, decimal, supply)
     .then((response: Address) => {
-      res.status(202).json({
-        message: response.address,
+      const contactAddress = response.address;
+      const token: IToken = { id: uuidv4(), name, symbol, decimal, supply, contactAddress, createdTimestamp: new Date() };
+
+      user.tokens.push(token);
+      user.save().then(() => {
+        res.status(202).json({
+          message: response.address,
+          token,
+        });
       });
     })
     .catch((err) => {
