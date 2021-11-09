@@ -163,9 +163,10 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
         <p className={"w-full font-Nunito text-red text-xs mt-2" + " " + (validityInput.supply ? "hidden" : "inline")}>Supply must be greater than 0</p>
         <p className={"w-full font-Nunito text-red text-xs mt-2" + " " + (validityInput.decimal ? "hidden" : "inline")}>Decimal must be between 0 and 18</p>
         <p className={"w-full font-Nunito text-red text-xs mt-2" + " " + (validityInput.symbol ? "hidden" : "inline")}>Symbol must be less than 10 characters</p>
-        <button className="block pinkButton mt-20 hover:from-pinkBright hover:to-beigeBright" type="submit">
+        <button className="inline-block pinkButton mt-20 hover:from-pinkBright hover:to-beigeBright" type="submit">
           Create
         </button>
+        <div id="loading" className={"w-8 h-8 bottom-0 mt-20 ml-8 relative duration-100" + " " + (requestDone ? "hidden" : "inline")}></div>
       </form>
 
       <h3 className={"w-full font-Nunito text-red text-xs mt-14" + " " + (ableToClose ? "hidden" : "inline")}>Please wait till your request has been fulfilled to close the side bar</h3>
