@@ -50,13 +50,13 @@ const LoginForm: React.FC = () => {
       <form className="flex flex-col">
         <div>
           <label className="inputLabel" htmlFor="username">
-            username or email:
+            username or email
           </label>
           <input className="inputField" ref={usernameRef} type="text" id="username" name="username" />
         </div>
         <div>
           <label className="inputLabel mt-3.5" htmlFor="password">
-            password:
+            password
           </label>
           <input className="inputField" ref={passwordRef} type="password" id="password" name="password" />
         </div>

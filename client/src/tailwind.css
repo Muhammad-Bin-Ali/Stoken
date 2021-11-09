@@ -62,3 +62,22 @@ body {
 .pinkButton {
   @apply font-Nunito font-bold py-2 rounded px-11 bg-gradient-to-br from-pink to-beige border-none text-white duration-75;
 }
+
+#loading {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #000;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}

@@ -1,7 +1,7 @@
 import cors, { CorsOptions } from "cors";
 
 const options: CorsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: [process.env.WEBSITE_URL!],
   credentials: true,
   optionsSuccessStatus: 200,
   exposedHeaders: ["set-cookie"],
