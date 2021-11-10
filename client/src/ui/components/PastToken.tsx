@@ -1,6 +1,6 @@
 import React from "react";
-import { Token } from "../../index";
-import { getShortDate } from "../../util/date";
+import { Token } from "../../index";//importing prop for 'pastToken'
+import { getShortDate } from "../../util/date";//importing token creation dates
 
 interface TokenPropType {
   token: Token;
@@ -10,6 +10,7 @@ const CHAIN = process.env.REACT_APP_CHAIN;
 const NET_NAME = process.env.REACT_APP_NET_NAME;
 
 const pastToken: React.FC<TokenPropType> = ({ token }) => {
+  //pastToken will call upon the prop 'token', which is the serverside collection of tokens, and will allow for the values of various elements to be displayed below
   return (
     <div className="pastToken grid grid-cols-custom h-20 hover:shadow-md duration-100 border-b border-projectGold hover:z-30 hover:border-white items-center rounded">
       <h3 className="pastTokenLabel ml-4">{getShortDate(token.createdTimestamp)}</h3>
