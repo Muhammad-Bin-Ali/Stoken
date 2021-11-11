@@ -12,15 +12,15 @@ const ONE_WEEK_SECONDS = 7 * 24 * 60 * 60;
 const app = express();
 export default app;
 
-app.disable("x-powered-by"); // remove the "X-Powered-By: Express" header (useless)
+app.disable("x-powered-by"); // Remove the "X-Powered-By: Express" header (useless)
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use(cors);
 
-// connect to mongoose database before serving app
-// export a promise to be reused by mongo session store so we don't need two mongo conn.s
+// Connects to mongoose database before serving app
+// Exports a promise to be reused by mongo session store so we don't need two mongo conn.s
 export const mongooseClientPromise = mongoose.connect(`${process.env.MONGO_URL!}/${process.env.MONGO_DB_NAME!}`).then((m) => {
   const conn = mongoose.connections[0];
   console.log(`connected to database ${conn?.name}`);
