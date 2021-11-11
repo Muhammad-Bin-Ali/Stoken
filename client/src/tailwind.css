@@ -1,8 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-//CSS styling for the webpage
-
+ /*CSS styling for the webpage*/
 @layer {
   @font-face {
     font-family: Gotham;
