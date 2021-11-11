@@ -1,11 +1,11 @@
 import React from "react";
 import PastToken from "./PastToken";
 import { useGlobalState, Token } from "../../index";
-
+//Props so that the tokens created can be updated as it is a variable that is used with the token creation files 
 interface RecentTokenProps {
   token: Token[];
 }
-
+//Updates the past tokens created table for the user if tokens are created 
 const PastTokensCreatedComponent: React.FC = ({}) => {
   const [tokens, setTokens] = useGlobalState("tokens");
 
@@ -16,7 +16,7 @@ const PastTokensCreatedComponent: React.FC = ({}) => {
       </div>
     );
   }
-
+//HTML elements and styling for the past tokens created table
   return (
     <div className="w-full mt-8 mb-32">
       <div className="header grid grid-cols-custom mb-4">
