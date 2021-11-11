@@ -9,7 +9,7 @@ interface Props {
 const CHAIN = process.env.REACT_APP_CHAIN;
 const NET_NAME = process.env.REACT_APP_NET_NAME;
 
-const RecentToken: React.FC<Props> = ({ token }) => {
+const RecentToken: React.FC<Props> = ({ token }) => {//creates UI element with the most recent token, formatted with CSS/Tailwind
   return (
     <div
       onClick={() => {
@@ -32,4 +32,4 @@ const RecentToken: React.FC<Props> = ({ token }) => {
   );
 };
 
-export default RecentToken;
+export default RecentToken;//this component will be used in RecentTokenComponent.tsx
