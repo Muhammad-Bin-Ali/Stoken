@@ -1,4 +1,4 @@
-require("dotenv").config(); // load environment variables
+require("dotenv").config(); // Load environment variables
 
 import express from "express";
 import mongoose from "mongoose";
