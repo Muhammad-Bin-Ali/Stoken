@@ -6,11 +6,13 @@ interface TokenPropType {
   token: Token;
 }
 
+//retrieving env variables from .env file
 const CHAIN = process.env.REACT_APP_CHAIN;
 const NET_NAME = process.env.REACT_APP_NET_NAME;
 
 const pastToken: React.FC<TokenPropType> = ({ token }) => {
   return (
+    //div component for a past token object (acts as template for data passed into it)
     <div className="pastToken grid grid-cols-custom h-20 hover:shadow-md duration-100 border-b border-projectGold hover:z-30 hover:border-white items-center rounded">
       <h3 className="pastTokenLabel ml-4">{getShortDate(token.createdTimestamp)}</h3>
       <h3 className="col-span-2 pastTokenLabel">{token.name}</h3>

@@ -13,7 +13,7 @@ const LoginForm: React.FC = () => {
 
   //Function for when the button is clicked (routes to authentication scripts)
   const handleLogin = (e: any) => {
-    e.preventDefault();
+    e.preventDefault(); //Error handling, gives error messages for when username or password isn’t given 
 
     const user = usernameRef.current?.value;
     const password = passwordRef.current?.value;

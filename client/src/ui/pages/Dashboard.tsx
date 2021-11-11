@@ -7,17 +7,19 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const Dashboard: React.FC = () => {
-  const [openCreateToken, setOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn");
-  const [tokens, setTokens] = useGlobalState("tokens");
+  const [openCreateToken, setOpen] = useState(false); //state variable for whether the sidebar is open or not
+  const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn"); //global state variable for whether user is authenticated or not
+  const [tokens, setTokens] = useGlobalState("tokens"); //global state variable that contains array of tokens that server returns
   const history = useHistory();
 
+  //method that's run whenever this component is rendered/rerendered
   useEffect(() => {
     if (!isLoggedIn) {
       history.push("/");
     }
   }, [isLoggedIn]);
 
+  //same as above but this one retrieves user's tokens from address
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/getTokens`, { withCredentials: true })
@@ -26,7 +28,7 @@ const Dashboard: React.FC = () => {
         const newTokens: Token[] = data.tokens;
 
         console.log(newTokens);
-        setTokens(newTokens);
+        setTokens(newTokens); //adding it to state variable
         setIsLoggedIn(true);
       })
       .catch((err) => {
@@ -37,15 +39,19 @@ const Dashboard: React.FC = () => {
       });
   }, []);
 
+  //function for closing sideBar - setter method
   const onCloseFunc = () => {
     setOpen(false);
   };
 
+  //function for opening it - setter method
   const openSideBar = () => {
     setOpen(true);
   };
 
   return (
+    //code for the dashbord page
+    //acts as the main HTML element that contains all dashbaord components
     <div className="2xl:mx-96 2xl:mx-72 xl:mx-64 lg:mx-52 sm:mx-32 mt-20 ">
       <div className="flex justify-between items-center ">
         <h1 className="font-Gotham font-bold uppercase text-projectCyan text-3xl inline-block">Dashboard</h1>
