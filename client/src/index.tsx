@@ -4,7 +4,7 @@ import Routes from "./Routes";
 import "./tailwind.generated.css";
 import { createGlobalState } from "react-hooks-global-state";
 
-export interface Token {
+export interface Token { //Creates token values that will need to be stored on the site
   name: string;
   symbol: string;
   createdTimestamp: string;
@@ -16,7 +16,8 @@ export interface Token {
 
 interface GlobalState {
   isLoggedIn: boolean;
-  tokens: Token[];
+  tokens: Token[];//Creates tokens prop which is used in scripts such as 'pastToken.tsx'. The values of the tokens are stored clientside to ensure that the code does not access a user's wallet to find such values, as that warrants a security risk
+  //with the values being stored here, it allows for a more secure program at minimal cost
 }
 
 const initialState: GlobalState = {

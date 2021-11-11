@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useGlobalState } from "../..";
 
+//Props for the variables on the frontend for convinience and so the HTML inputs can be processed with React
 interface TokenDataType {
   name: string;
   symbol: string;
@@ -14,6 +15,7 @@ interface openPropType {
   onClose: Function;
 }
 
+//This function takes in the user interactions to the create token form with React (takes in HTTP requests)
 const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
   const [tokenData, setTokenData] = useState<TokenDataType>({ name: "", symbol: "", supply: 1, decimal: 0 });
   const [validityInput, setValidity] = useState({ name: true, symbol: true, supply: true, decimal: true });
@@ -29,7 +31,7 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
       return;
     }
 
-    //do nothing if validityInput JSON object contains false
+    //Do nothing if validityInput JSON object contains false
     if (Object.values(validityInput).includes(false)) {
       return;
     }
@@ -47,7 +49,7 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
     };
 
     console.log(typeof data.supply);
-
+//Processes HTTP requests and sends to backend 
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/createToken`, data, { withCredentials: true })
       .then((res) => {
@@ -69,11 +71,13 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
         console.log(data.message);
       });
   };
-
+  
+//Shows the user changes on the form (updates it so that the user sees what they are typing)
+//Checks if the user input is valid, if it isn't, prompts them to enter a valid input
   const onInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const re = /^[0-9\b]*$/;
-    //if its name is supply and it doesn't pass the regex test
-    //to ensure a numerical only input*
+    //If its name is supply and it doesn't pass the regex test
+    //To ensure a numerical only input*
     if (event.target.name === "supply" && !re.test(event.target.value)) {
       return;
     }
@@ -82,13 +86,13 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
     }
 
     //ENSURE INPUT VALIDITY
-    //if the length of name is greater than 40 characters, then don't update input field and tell user to check their input
+    //If the length of name is greater than 40 characters, then don't update input field and tell user to check their input
     if (event.target.name === "name" && event.target.value.length > 40) {
       setValidity({
         ...validityInput,
         [event.target.name]: false,
       });
-      return; //by returning early, we're not able to update the state variable. Since input field is controlled by state variable, it won't be updated
+      return; //By returning early, we're not able to update the state variable. Since input field is controlled by state variable, it won't be updated
     }
 
     if (event.target.name === "symbol" && event.target.value.length > 10) {
@@ -96,7 +100,7 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
         ...validityInput,
         [event.target.name]: false,
       });
-      return; //by returning early, we're not able to update the state variable. Since input field is controlled by state variable, it won't be updated
+      return; //By returning early, we're not able to update the state variable. Since input field is controlled by state variable, it won't be updated
     }
 
     setTokenData({
@@ -119,11 +123,11 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
       return;
     }
 
-    //if it passes all the checks, then reset state of validityInput
+    //If it passes all the checks, then reset state of validityInput
     setValidity({ name: true, symbol: true, supply: true, decimal: true });
   };
 
-  //function to close sideBar
+  //Function to close sideBar
   const closeSide: React.MouseEventHandler<SVGSVGElement> = (event) => {
     //if request isn't finished yet, then prompt user that they can't close yet
     if (!requestDone) setAbleToClose(false);
@@ -132,7 +136,7 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
       setAddress({ visible: false, address: "" });
     }
   };
-
+//Styling for the create token form + HTML elements 
   return (
     <div className={" bg-white w-1/3 fixed right-0 top-0 bottom-0 z-20 shadow-custom flex justify-center px-20 py-60 flex-col justify-start duration-300" + " " + (open ? "" : "transform translate-x-full")}>
       <svg onClick={closeSide} className="absolute right-10 top-10 fill-current text-projectCyan-dark cursor-pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
