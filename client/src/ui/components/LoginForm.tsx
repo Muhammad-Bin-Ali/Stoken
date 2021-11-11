@@ -27,7 +27,8 @@ const LoginForm: React.FC = () => {
       setMessage("You need to provide a password");
       return;
     }
-
+    
+//Processes HTTP requests made and sends to backend 
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/login`, { user, password }, { withCredentials: true })
       .then((res) => {
