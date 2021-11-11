@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useGlobalState } from "../../index";
 
+//Regex's are for determining if a email/username/password is valid to use 
 export const usernameRegex = /^[a-zA-Z0-9_]{3,16}$/gm;
 export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 export const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
@@ -71,7 +72,7 @@ const SignUpForm: React.FC = () => {
       setMessage("Confirmed password is different than original password");
       return;
     }
-
+  //Processes the HTML requests and changes the state of the page to LoggedIn (authenticates the user) when logged in 
     axios
       .post(`${process.env.REACT_APP_SERVER_URL}/users`, { email, username, password }, { withCredentials: true })
       .then((res) => {
