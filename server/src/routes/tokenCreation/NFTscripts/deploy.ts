@@ -1,7 +1,8 @@
 const { ethers } = require("hardhat");
 
+//method to create token
 export default async function deployToken(name: String, symbol: String, decimal: number, supply: number) {
-  //creates an instance of contract ST_BASIC_TOKEN
+  //creates an instance of contract ST_BASIC_TOKEN. Converts contract code to bytecode
   const contractInstance = await ethers.getContractFactory("ST_Basic_Token");
   // Start deployment, returning a promise that resolves to a contract object
   //deployed it with the specified fields

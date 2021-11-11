@@ -1,3 +1,5 @@
+//File responsible for email verification via AWS
+
 import AWS from "aws-sdk";
 
 const config: AWS.SES.ClientConfiguration = {
@@ -10,6 +12,7 @@ const config: AWS.SES.ClientConfiguration = {
 
 const SES = new AWS.SES(config);
 
+//method that's used to send an email to soeone.
 export function sendEmail(recipiant: string, subject: string, body: string) {
   const options: AWS.SES.SendEmailRequest = {
     Source: process.env.AWS_SES_EMAIL_ADDRESS!,
@@ -34,6 +37,7 @@ export function sendEmail(recipiant: string, subject: string, body: string) {
   return SES.sendEmail(options).promise();
 }
 
+//method that will send confirmation email with verification code
 export function sendConfirmationEmail(recipiant: string, code: string) {
   // when testing, you don't have to check your email
   if (process.env.NODE_ENV !== "production") {

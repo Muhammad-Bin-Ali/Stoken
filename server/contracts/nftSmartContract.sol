@@ -1,5 +1,3 @@
-// Token Generated using SuperToken https://supertoken.xyz
-
 // SPDX-License-Identifier: MIT
 
 contract nftSmartContract {
@@ -12,6 +10,7 @@ contract nftSmartContract {
     }
 }
 
+//ERC-20 contract convention
 contract Ownable is nftSmartContract {
     address private _owner;
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
@@ -38,6 +37,7 @@ contract Ownable is nftSmartContract {
     }
 }
 
+//class for getter and setter methods for a token
 interface IST20 {
     function name() external view returns (string memory);
     function symbol() external view returns (string memory);
@@ -53,6 +53,7 @@ interface IST20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
+//contract inherits properties of ownable and ERC-20 TOKEN methods
 contract ST20 is Ownable, IST20 {
     mapping (address => uint256) private _balances;
     mapping (address => mapping (address => uint256)) private _allowances;
@@ -161,18 +162,20 @@ abstract contract ServicePayer {
     }
 }
 
+//futher class inheritence for the BASE token contract
+//the constructor below is what is used to create the token object. 
 contract ST_Basic_Token is ST20 {
     constructor (
-        string memory name,
-        string memory symbol,
-        uint8 decimals,
-        uint256 initialBalance
+        string memory name, //name
+        string memory symbol, //symbol
+        uint8 decimals, //decimal
+        uint256 initialBalance //supply
     )
-        ST20(name, symbol)
+        ST20(name, symbol) //creates the token with the name and symbol
      
     {
         require(initialBalance > 0, "ST_Basic_Token: supply cannot be zero");
-        _setupDecimals(decimals);
+        _setupDecimals(decimals); //method to set decimal attribute
         _mint(_msgSender(), initialBalance);
     }
 }

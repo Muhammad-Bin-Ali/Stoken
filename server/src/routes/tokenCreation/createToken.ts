@@ -7,9 +7,12 @@ interface Address {
   address: string;
 }
 
+//server method that is called when a request is made to create a token
 export default async function createToken(req: Request, res: Response) {
+  //destructing data sent through request
   const { name, symbol, decimal, supply } = req.body;
 
+  //checks to ensure that the data is of right type
   if (typeof name !== "string") {
     res.status(400).json({
       message: "`name` must be of type string",
@@ -38,9 +41,12 @@ export default async function createToken(req: Request, res: Response) {
     return;
   }
 
+  //retrieves user through their sessionID
   const userId = req.session.userId!;
   const user = await User.findById(userId);
 
+  //if the user does not exist, then a message is sent back saying that the user was not found.
+  //to prevent unauthenticated token creation
   if (!user) {
     res.status(500).json({
       message: "User not found",
@@ -48,16 +54,13 @@ export default async function createToken(req: Request, res: Response) {
     return;
   }
 
-  console.log("FUCKOFF");
-
+  //calls the deployToken function to create token object
   deployToken(name, symbol, decimal, supply)
     .then((response: Address) => {
+      //if token is successfully created, the newly created token's information is pushed into database
+      //token address and user's past tokens created are returned via http request.
       const contactAddress = response.address;
       const token: IToken = { id: uuidv4(), name, symbol, decimal, supply, contactAddress, createdTimestamp: new Date() };
-
-      console.log(token);
-      console.log(user);
-      console.log(user.tokens);
 
       user.tokens.push(token);
       user.save().then(() => {
@@ -68,8 +71,7 @@ export default async function createToken(req: Request, res: Response) {
       });
     })
     .catch((err) => {
-      console.log(err);
-
+      //returns code 500 is token creation fails
       res.status(500).json({
         message: "Token Creation Failed",
       });

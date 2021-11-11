@@ -1,3 +1,6 @@
+//ROOT server file
+//create express server, connecting to mongoDB database, and adding router for routes
+
 require("dotenv").config(); // Load environment variables
 
 import express from "express";
