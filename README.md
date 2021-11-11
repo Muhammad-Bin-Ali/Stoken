@@ -1,4 +1,4 @@
-# School Wallet Version 0.1.0
+# Stoken Version 0.1.0
 
 Stoken is our proposed solution to tackle the ambiguitiy of SHSM certifications. Through the power of NFTs and the XDAI Blockchain, stoken aims to digitalize SHSM certifications, giving students a concrete way to measure their progress through their respective SHSM Program. However, in our current implementation, only one school can use our server, and the school's SHSM supervisors must share one collective wallet. Whilst this makes it easier for administration to keep track of spending, it does pose difficulties when it comes to scalability. 
 
