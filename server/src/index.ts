@@ -1,5 +1,8 @@
 //ROOT server file
 //create express server, connecting to mongoDB database, and adding router for routes
+//Programmer: Ryan Arora, Muhammad Ali, Sree Bandi, Daniel Rusetski
+//Date: 10th November 2021
+//Purpose: Backend for stoken - an application intended to digitalize SHSM certifications via NFTs
 
 require("dotenv").config(); // Load environment variables
 
