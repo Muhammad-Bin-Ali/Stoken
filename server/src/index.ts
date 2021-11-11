@@ -12,7 +12,7 @@ const ONE_WEEK_SECONDS = 7 * 24 * 60 * 60;
 const app = express();
 export default app;
 
-app.disable("x-powered-by"); // Remove the "X-Powered-By: Express" header (useless)
+app.disable("x-powered-by"); // Removes the "X-Powered-By: Express" header (useless)
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
