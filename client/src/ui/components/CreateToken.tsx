@@ -40,6 +40,10 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
       return;
     }
 
+    if (!requestDone) {
+      return;
+    }
+
     setDone(false);
     const data: TokenDataType = {
       name: tokenData.name,
@@ -68,7 +72,9 @@ const CreateToken: React.FC<openPropType> = ({ open, onClose }) => {
         const data: any = err.response.data;
         setDone(true);
         setAbleToClose(true);
-        console.log(data.message);
+        if (data.message) {
+          console.log(data.message);
+        }
       });
   };
   
