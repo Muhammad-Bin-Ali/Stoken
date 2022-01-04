@@ -3,12 +3,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useGlobalState } from "../..";
 import { useHistory } from "react-router-dom";
-
+//Header for the page
 const Header: React.FC<any> = () => {
+  //Getting the state of being logged in for enabling the login/logout buttons and dashboard based on authentication status (conditional rendering) 
   const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn");
   const [tokens, setTokens] = useGlobalState("tokens");
   const history = useHistory();
-
+//HTML elements and styling for the header of the page 
   return (
     <div className="mainHeader flex justify-between w:full 2xl:mx-64 xl:mx-60 sm:mx-32 mt-10 items-center">
       <div className="logo flex items-center">

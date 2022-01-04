@@ -1,3 +1,4 @@
+//Getting date time via export for the token creation information 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 export function getLongDate(ts: string) {
